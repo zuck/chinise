@@ -5,6 +5,10 @@ import re
 
 def pinyinize(text):
     """Return pinyin reading of a string of traditional or simplified Hanzi.
+
+    ex:
+        >>> pinyinize("朋友们好")
+        ['peng2you5', 'men5', 'hao4']
     """
     data_path = 'cedict_ts.u8'
     dictionary = {}
@@ -33,7 +37,7 @@ def pinyinize(text):
             else:
                 buff2 = buff2[:-1]
         if not found and buff:
-            output.append(buff[0])
+            output.append("")
             buff = buff[1:]
              
     return output
