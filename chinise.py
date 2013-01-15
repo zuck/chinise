@@ -15,10 +15,17 @@ import pinyin
 
 if __name__ == "__main__":
     args = sys.argv[1:]
+    cmd = args[0]
     
-    if args[0] == "pinyinize":
+    if cmd == "pinyinize":
         text = args[1]
         print pinyin.pinyinize(text)
+
+    elif cmd == "meaning":
+        text = args[1]
+        words = pinyin.meaning(text)
+        for w, m in words:
+            print "%s:\t\t%s" % (w, m) 
 
     else:
         print "python chinise.py <function> [<args>]"
@@ -27,3 +34,6 @@ if __name__ == "__main__":
         print ""
         print "pinyinize        Return the pinyin of the specified string"
         print "                 ex: python chinise.py pinyinize \"你好\""
+        print ""
+        print "meaning          Return the meaning of the specified string"
+        print "                 ex: python chinise.py meaning \"你好\""

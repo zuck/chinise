@@ -100,7 +100,7 @@ def get_dictionary():
     return module.DICT
 
 def pinyinize(text):
-    """Return pinyin reading of a string of traditional or simplified Hanzi.
+    """Return pinyin reading of a string in traditional or simplified Hanzi.
 
     ex:
         >>> pinyinize("朋友们好")
@@ -126,4 +126,32 @@ def pinyinize(text):
             output.append("")
             buff = buff[1:]
              
+    return output
+
+def meaning(text):
+    """Return the english translation of a string in traditional or simplified Hanzi.
+    
+    ex:
+        >>> translate("你好")
+        [("你好", "Hello!/Hi!/How are you?")]
+    """
+    output = []
+
+    dictionary = get_dictionary()
+    buff = text
+
+    while len(buff) > 0:
+        found = False
+        buff2 = buff
+        while len(buff2) > 0:
+            if dictionary.has_key(buff2):
+                output.append((buff2, dictionary[buff2][1]))
+                buff = buff[len(buff2):]
+                found = True
+                buff2 = ""
+            else:
+                buff2 = buff2[:-1]
+        if not found and buff:
+            buff = buff[1:]
+
     return output
